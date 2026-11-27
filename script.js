@@ -343,12 +343,19 @@ function createProjectCard(repo, index, featured = null) {
 function initializeProjectCarousel() {
     if (!projectsTrack || !carouselDotsContainer) return;
 
+    // 1. Remove old clones if initialized again.
+    projectsTrack.querySelectorAll('[data-carousel-clone="true"]')
+        .forEach(clone => clone.remove());
+
+    // 2. Get original cards.
     const cards = [...projectsTrack.querySelectorAll('.project-card')];
     const totalSlides = cards.length;
+
     let currentIndex = 0;
 
     if (!totalSlides) return;
 
+    // 3. Generate pagination dots.
     carouselDotsContainer.innerHTML = cards.map((_, index) => `
         <button type="button"
             class="dot ${index === 0 ? 'active' : ''}"
@@ -357,15 +364,65 @@ function initializeProjectCarousel() {
         </button>
     `).join('');
 
-    const carouselDots = carouselDotsContainer.querySelectorAll('.dot');
-    const showControls = totalSlides > 1;
+    const carouselDots = [...carouselDotsContainer.querySelectorAll('.dot')];
 
-    if (prevProjectBtn) prevProjectBtn.hidden = !showControls;
-    if (nextProjectBtn) nextProjectBtn.hidden = !showControls;
-    carouselDotsContainer.hidden = !showControls;
+    // 4. Create duplicate cards.
+    function createCloneSet() {
+        const fragment = document.createDocumentFragment();
 
+        cards.forEach(card => {
+            const clone = card.cloneNode(true);
+
+            clone.dataset.carouselClone = 'true';
+            clone.setAttribute('aria-hidden', 'true');
+
+            // Avoid duplicate IDs.
+            clone.removeAttribute('id');
+
+            clone.querySelectorAll('[id]').forEach(element => {
+                element.removeAttribute('id');
+            });
+
+            // Keep cloned links out of keyboard navigation.
+            clone.querySelectorAll(
+                'a, button, input, select, textarea, [tabindex]'
+            ).forEach(element => {
+                element.setAttribute('tabindex', '-1');
+            });
+
+            fragment.appendChild(clone);
+        });
+
+        return fragment;
+    }
+
+    // 5. Add duplicate sets around the originals.
+    projectsTrack.prepend(createCloneSet(), createCloneSet());
+    projectsTrack.append(createCloneSet(), createCloneSet());
+
+    const allCards = [...projectsTrack.querySelectorAll('.project-card')];
+
+    // Original cards start after two cloned sets.
+    const middleStart = totalSlides * 2;
+
+    // 6. Calculate the actual horizontal position of a card.
+    function getCardPosition(card) {
+        return card.getBoundingClientRect().left
+            - projectsTrack.getBoundingClientRect().left
+            + projectsTrack.scrollLeft;
+    }
+
+    // 7. Calculate the width of one complete set.
+    function getSetWidth() {
+        return getCardPosition(allCards[middleStart + totalSlides])
+            - getCardPosition(allCards[middleStart]);
+    }
+
+    let setWidth = getSetWidth();
+
+    // 8. Update counter and dots.
     function updateCarouselUI(index) {
-        currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
+        currentIndex = (index % totalSlides + totalSlides) % totalSlides;
 
         if (carouselCounter) {
             carouselCounter.textContent =
@@ -377,19 +434,36 @@ function initializeProjectCarousel() {
         });
     }
 
+    // 9. Navigate to the nearest copy of the requested project.
     function scrollToSlide(index) {
-        const targetIndex = (index + totalSlides) % totalSlides;
-        const targetCard = cards[targetIndex];
+        const targetIndex =
+            (index % totalSlides + totalSlides) % totalSlides;
 
-        if (!targetCard) return;
+        const candidates = allCards.filter((_, physicalIndex) =>
+            physicalIndex % totalSlides === targetIndex
+        );
+
+        const targetCard = candidates.reduce((closest, card) => {
+            return Math.abs(getCardPosition(card) - projectsTrack.scrollLeft) <
+                Math.abs(getCardPosition(closest) - projectsTrack.scrollLeft)
+                ? card
+                : closest;
+        });
 
         projectsTrack.scrollTo({
-            left: targetCard.offsetLeft - projectsTrack.offsetLeft,
+            left: getCardPosition(targetCard),
             behavior: 'smooth'
         });
 
         updateCarouselUI(targetIndex);
     }
+
+    // 10. Configure controls.
+    const showControls = totalSlides > 1;
+
+    if (prevProjectBtn) prevProjectBtn.hidden = !showControls;
+    if (nextProjectBtn) nextProjectBtn.hidden = !showControls;
+    carouselDotsContainer.hidden = !showControls;
 
     if (prevProjectBtn) {
         prevProjectBtn.onclick = () => scrollToSlide(currentIndex - 1);
@@ -405,31 +479,71 @@ function initializeProjectCarousel() {
         });
     });
 
-    let scrollTimeout;
+    // 11. Handle infinite scrolling.
+    function handleInfiniteScroll() {
+        if (!setWidth) return;
 
-    projectsTrack.addEventListener('scroll', () => {
-        clearTimeout(scrollTimeout);
+        let position = projectsTrack.scrollLeft;
 
-        scrollTimeout = setTimeout(() => {
-            const trackRect = projectsTrack.getBoundingClientRect();
-            let closestIndex = 0;
-            let closestDistance = Infinity;
+        // Reposition when entering the previous duplicate set.
+        if (position < setWidth) {
+            position += setWidth;
+        }
 
-            cards.forEach((card, index) => {
-                const distance = Math.abs(card.getBoundingClientRect().left - trackRect.left);
+        // Reposition when entering the next duplicate set.
+        else if (position >= setWidth * 3) {
+            position -= setWidth;
+        }
 
-                if (distance < closestDistance) {
-                    closestDistance = distance;
-                    closestIndex = index;
-                }
-            });
+        if (position !== projectsTrack.scrollLeft) {
+            projectsTrack.scrollLeft = position;
+        }
 
-            updateCarouselUI(closestIndex);
-        }, 100);
+        // 12. Find the card closest to the left edge.
+        const trackRect = projectsTrack.getBoundingClientRect();
+
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        allCards.forEach((card, index) => {
+            const distance = Math.abs(
+                card.getBoundingClientRect().left - trackRect.left
+            );
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        // Convert physical index into original project index.
+        const logicalIndex =
+            (closestIndex - middleStart + totalSlides) % totalSlides;
+
+        updateCarouselUI(logicalIndex);
+    }
+
+    // 13. Listen to actual scrolling.
+    projectsTrack.addEventListener('scroll', handleInfiniteScroll, {
+        passive: true
     });
 
+    // 14. Start at the first original card.
+    projectsTrack.scrollLeft = getCardPosition(allCards[middleStart]);
+
     updateCarouselUI(0);
+
+    // 15. Update dimensions on window resize.
+    window.addEventListener('resize', () => {
+        setWidth = getSetWidth();
+
+        if (setWidth) {
+            projectsTrack.scrollLeft =
+                getCardPosition(allCards[middleStart + currentIndex]);
+        }
+    });
 }
+
 
 
 //Fetch GitHub repositories and display them in the carousel

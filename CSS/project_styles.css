@@ -86,10 +86,16 @@
     display: flex;
     gap: 2rem;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
+
+    /* Remove mandatory snapping for continuous scrolling */
+    scroll-snap-type: none;
+
+    /* JavaScript controls the scroll position */
+    scroll-behavior: auto;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
     padding: 0.25rem 0.15rem 0.75rem;
 }
 
@@ -100,17 +106,20 @@
 /* Individual Slide Card (2 visible on desktop, 1 on mobile) */
 .project-card {
     flex: 0 0 calc(50% - 1rem);
-    scroll-snap-align: start;
+    scroll-snap-align: none;
     position: relative;
-    background: var(--bg-card);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--border-subtle);
-    padding: clamp(1.25rem, 2.5vw, 1.75rem);
-    display: flex;
-    flex-direction: column;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Smaller screens */
+@media (max-width: 900px) {
+    .project-card {
+        flex: 0 0 100%;
+    }
+
+    .projects-track {
+        gap: 1rem;
+    }
+}
 .project-card:hover {
     border-color: rgba(212, 246, 55, 0.5);
     box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6), 0 0 22px rgba(212, 246, 55, 0.07);
