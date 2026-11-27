@@ -1,0 +1,212 @@
+footer {
+    border-top: 1px solid var(--border-subtle);
+    background-color: rgba(8, 9, 8, 0.92);
+    padding: clamp(3.5rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2.5rem) 2rem;
+}
+
+.footer-container {
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.footer-header {
+    margin-bottom: 2.75rem;
+}
+
+.footer-header .section-tag {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--neon-accent);
+    margin-bottom: 0.5rem;
+}
+
+.footer-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+}
+
+/* Two-Column Responsive Grid */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+}
+
+.footer-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 440px;
+    margin-bottom: 2rem;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+}
+
+.contact-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.contact-label {
+    color: var(--text-muted);
+    min-width: 65px;
+}
+
+.contact-item a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    word-break: break-all;
+}
+
+.contact-item a:hover {
+    color: var(--neon-accent);
+}
+
+.status-online {
+    color: var(--neon-accent);
+}
+
+/* HUD Form Card */
+.contact-form-card {
+    position: relative;
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-subtle);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.hud-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background-color: rgba(8, 9, 8, 0.85);
+    border: 1px solid #262C24;
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #4E544C;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--neon-accent);
+    box-shadow: 0 0 12px rgba(212, 246, 55, 0.15);
+}
+
+/* Submit Button */
+.submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--neon-accent);
+    color: #080908;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 22px rgba(212, 246, 55, 0.35);
+}
+
+/* Inline Terminal Success Alert */
+.form-alert {
+    display: none;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(212, 246, 55, 0.45);
+    background-color: rgba(212, 246, 55, 0.08);
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    color: var(--neon-accent);
+    line-height: 1.5;
+}
+
+.form-alert.show {
+    display: flex;
+    animation: fadeInAlert 0.25s ease forwards;
+}
+
+.alert-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--neon-accent);
+    box-shadow: 0 0 8px var(--neon-accent);
+    flex-shrink: 0;
+}
+
+@keyframes fadeInAlert {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Bottom Copyright Bar */
+.footer-bottom {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+}

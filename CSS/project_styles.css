@@ -1,0 +1,396 @@
+#projects {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(3.5rem, 6vw, 6.5rem) clamp(1.25rem, 4vw, 2.5rem);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.projects-container {
+    width: 100%;
+}
+
+/* Header Row with Title on Left & Controls on Right */
+.projects-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.projects-header .mono-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--neon-accent);
+    margin-bottom: 0.65rem;
+}
+
+.projects-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.1rem, 5.5vw, 3.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1.05;
+}
+
+/* Carousel Controls ("01 / 03" + PREV / NEXT buttons) */
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.carousel-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--neon-accent);
+}
+
+.carousel-buttons {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.carousel-btn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    padding: 0.55rem 0.95rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.carousel-btn:hover {
+    border-color: var(--neon-accent);
+    color: var(--neon-accent);
+    background: rgba(212, 246, 55, 0.06);
+}
+
+/* Horizontal Scroll-Snap Carousel Track */
+.projects-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.projects-track {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    padding: 0.25rem 0.15rem 0.75rem;
+}
+
+.projects-track::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+/* Individual Slide Card (2 visible on desktop, 1 on mobile) */
+.project-card {
+    flex: 0 0 calc(50% - 1rem);
+    scroll-snap-align: start;
+    position: relative;
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-subtle);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    border-color: rgba(212, 246, 55, 0.5);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6), 0 0 22px rgba(212, 246, 55, 0.07);
+}
+
+/* Top Metadata Bar */
+.project-meta-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+}
+
+.project-id {
+    color: var(--text-muted);
+}
+
+.project-status {
+    color: var(--neon-accent);
+    border: 1px solid rgba(212, 246, 55, 0.35);
+    background: rgba(212, 246, 55, 0.05);
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.62rem;
+}
+
+/* Framed Screenshot */
+.project-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #0D110E;
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+    margin-bottom: 1.35rem;
+}
+
+.project-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-thumb img {
+    transform: scale(1.04);
+}
+
+.project-scanline {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(212, 246, 55, 0.1) 50%,
+        transparent 100%
+    );
+    height: 35%;
+    transform: translateY(-100%);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.project-card:hover .project-scanline {
+    opacity: 1;
+    animation: projectScan 2s linear infinite;
+}
+
+@keyframes projectScan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(350%); }
+}
+
+/* Card Info */
+.project-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.project-info h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.25rem, 2.2vw, 1.45rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+}
+
+.project-info p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.68;
+    margin-bottom: 1.25rem;
+}
+
+/* Tech Stack Pills */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: auto;
+    margin-bottom: 1.35rem;
+}
+
+.project-tags span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid #262C24;
+    padding: 0.24rem 0.58rem;
+    border-radius: 3px;
+}
+
+/* Bottom Links */
+.project-actions {
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.project-link .arrow {
+    color: var(--neon-accent);
+    transition: transform 0.2s ease;
+}
+
+.project-link:hover {
+    color: var(--neon-accent);
+}
+
+.project-link:hover .arrow {
+    transform: translateX(4px);
+}
+
+/* Pagination Dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+}
+
+.carousel-dots .dot {
+    width: 24px;
+    height: 3px;
+    border: none;
+    background-color: #262C24;
+    cursor: pointer;
+    transition: background-color 0.25s ease, width 0.25s ease;
+}
+
+.carousel-dots .dot.active {
+    width: 38px;
+    background-color: var(--neon-accent);
+    box-shadow: 0 0 8px var(--neon-accent);
+}
+
+/* Responsive: 1 Full Card per Slide on Tablets & Phones */
+@media (max-width: 900px) {
+    .project-card {
+        flex: 0 0 100%;
+    }
+}
+
+@media (max-width: 540px) {
+    .carousel-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .project-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* =========================================
+   DYNAMIC GITHUB PROJECTS
+   ========================================= */
+
+/* Loading and error messages */
+.loading-projects {
+    width: 100%;
+    padding: 3rem 1rem;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--neon-accent);
+    letter-spacing: 0.08em;
+}
+
+/* Consistent card heights */
+.project-card {
+    min-width: 0;
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
+/* Prevent long repository names from breaking layout */
+.project-id,
+.project-info h3 {
+    overflow-wrap: anywhere;
+}
+
+/* Repository descriptions */
+.project-info p {
+    overflow-wrap: anywhere;
+}
+
+/* Keep repository tags consistent */
+.project-tags span {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+/* Improve carousel navigation */
+.carousel-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Improve pagination accessibility */
+.carousel-dots .dot:focus-visible,
+.carousel-btn:focus-visible,
+.project-link:focus-visible {
+    outline: 2px solid var(--neon-accent);
+    outline-offset: 4px;
+}
+
+/* Smooth card rendering */
+.project-card {
+    height: auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 900px) {
+    .project-card {
+        flex: 0 0 100%;
+    }
+
+    .projects-track {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 540px) {
+    .project-meta-bar {
+        flex-wrap: wrap;
+    }
+
+    .project-info p {
+        font-size: 0.85rem;
+    }
+
+    .project-tags span {
+        font-size: 0.62rem;
+    }
+}

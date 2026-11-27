@@ -1,0 +1,258 @@
+@media (max-width: 768px) {
+    /* CRITICAL FIX: Prevents header from trapping the fixed sidebar */
+    header {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background-color: #080908 !important;
+    }
+
+    nav {
+        padding: 1rem 1.5rem;
+    }
+
+    /* Animated Hamburger Button */
+    .hamburger {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 26px;
+        height: 18px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 250;
+        position: relative;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #F4F5F4;
+        border-radius: 2px;
+        transform-origin: center;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 0.2s ease,
+                    background-color 0.2s ease;
+    }
+
+    .hamburger:hover span,
+    .hamburger.is-open span {
+        background-color: var(--neon-accent);
+    }
+
+    .hamburger.is-open span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.is-open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    .hamburger.is-open span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Slide-out LEFT Sidebar */
+    .nav-drawer {
+        display: flex !important;
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 270px;
+        height: 100vh;
+        background-color: #0B0D0B;
+        border-right: 1px solid var(--border-subtle);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 1.5rem;
+        gap: 2rem;
+        z-index: 200;
+        transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-drawer.active {
+        left: 0 !important;
+    }
+
+    .drawer-header {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .drawer-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        color: var(--neon-accent);
+        letter-spacing: 0.08em;
+    }
+
+    .close-drawer {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 1.6rem;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 1.25rem;
+    }
+
+    .nav-links a {
+        display: block;
+        font-size: 0.85rem;
+        padding: 0.35rem 0;
+    }
+
+    .resume-btn {
+        width: 100%;
+        text-align: center;
+        margin-top: auto;
+        padding: 0.65rem 1rem;
+    }
+
+    .nav-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(3px);
+        opacity: 0;
+        visibility: hidden;
+        z-index: 150;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+@media (max-width: 768px) {
+    /* Place header ABOVE the blur overlay (150), but BELOW the sidebar (250) */
+    header {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background-color: #080908 !important;
+        z-index: 180 !important;
+    }
+
+    .nav-drawer {
+        /* Keep your existing properties, just ensure z-index is highest */
+        z-index: 250 !important;
+    }
+
+    .nav-overlay {
+        z-index: 150 !important;
+    }
+}
+
+/* Tablet & Small Laptop */
+@media (max-width: 960px) {
+    #home {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 3.5rem;
+        padding-bottom: 4rem;
+        gap: 2.75rem;
+    }
+
+    .hero p {
+        max-width: 560px;
+    }
+
+    .hero-hud {
+        width: 100%;
+        max-width: 560px;
+    }
+}
+
+/* Mobile Phones */
+@media (max-width: 600px) {
+    #home {
+        padding-top: 2.5rem;
+        padding-bottom: 3.5rem;
+        gap: 2.25rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .projects_btn,
+    .about_btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-hud {
+        min-height: 230px;
+    }
+
+    .hud-bars {
+        margin: 1.5rem 0;
+    }
+}
+
+/* Very Narrow Phones (e.g. 320px–380px) */
+@media (max-width: 380px) {
+    .status-badge {
+        font-size: 0.58rem;
+        padding: 0.3rem 0.65rem;
+        letter-spacing: 0.04em;
+    }
+
+    .hud-header {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
+@media (max-width: 960px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Tablet Breakpoint */
+@media (max-width: 900px) {
+    .about-editorial-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .about-left-col {
+        max-width: 440px;
+        width: 100%;
+    }
+}
+
+/* Mobile Phone Breakpoint */
+@media (max-width: 540px) {
+    .tech-columns {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .about-statement {
+        font-size: 1.35rem;
+    }
+}
+@media (max-width: 380px) {
+    .portrait-meta {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+}
+

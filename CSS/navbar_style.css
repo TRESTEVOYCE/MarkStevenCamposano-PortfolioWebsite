@@ -1,0 +1,168 @@
+header {
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(8, 9, 8, 0.85);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 1.1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+}
+
+/* 1.5s Terminal Typing Animation for MARK_CAMPOSANO */
+/* Looping Terminal Typing Animation for MARK_CAMPOSANO */
+.typing-logo {
+    display: inline-block;
+    color: var(--text-primary);
+    text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--neon-accent);
+    width: 0;
+    animation:
+        logoTypingLoop 4.5s steps(14, end) infinite,
+        logoCursorBlink 0.6s step-end infinite;
+}
+
+@keyframes logoTypingLoop {
+    0% {
+        width: 0;
+    }
+  
+    33.3% {
+        width: 100%;
+    }
+  
+    78% {
+        width: 100%;
+    }
+
+    95%, 100% {
+        width: 0;
+    }
+}
+
+@keyframes logoCursorBlink {
+    0%, 100% { border-color: var(--neon-accent); }
+    50% { border-color: transparent; }
+}
+
+
+.nav-drawer {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.drawer-header,
+.hamburger,
+.nav-overlay {
+    display: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.25rem;
+}
+
+.nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--neon-accent);
+}
+
+.resume-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid #2C3329;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.02);
+    transition: all 0.2s ease;
+}
+
+.resume-btn:hover {
+    border-color: var(--neon-accent);
+    color: var(--neon-accent);
+}
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* HUD Theme Toggle Pill */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--text-primary);
+    background-color: rgba(128, 128, 128, 0.06);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 0.45rem 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--neon-accent);
+    color: var(--neon-accent);
+}
+
+.theme-indicator {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--neon-accent);
+    box-shadow: 0 0 8px var(--neon-accent);
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+/* Mobile Sidebar Adjustment (add inside @media (max-width: 768px) in responsive_styles.css) */
+@media (max-width: 768px) {
+    .nav-actions {
+        flex-direction: column;
+        width: 100%;
+        margin-top: auto;
+        gap: 0.75rem;
+    }
+
+    .theme-toggle,
+    .resume-btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}

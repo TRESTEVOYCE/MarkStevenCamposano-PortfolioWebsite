@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEVES | Web Developer</title>
+
+<script>
+    (function () {
+        const savedTheme = localStorage.getItem('portfolio_theme');
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+<!-- Your CSS files (responsive_styles.css MUST be last) -->
+<link rel="stylesheet" href="CSS/style.css">
+<link rel="stylesheet" href="CSS/navbar_style.css">
+<link rel="stylesheet" href="CSS/hero_style.css">
+<link rel="stylesheet" href="CSS/about_style.css">
+<link rel="stylesheet" href="CSS/project_styles.css">
+<link rel="stylesheet" href="CSS/footer_styles.css">
+<link rel="stylesheet" href="CSS/responsive_styles.css">
+</head>
+
+<body>
+
+<!-- Dynamic Random Shooting Neon Beams Container -->
+<div class="bg-beams" id="bgBeams" aria-hidden="true"></div>
+
+    <header>
+    <nav>
+        <div class="logo">
+            <h1><a href="#home" class="typing-logo">MARK_STEVEN_CAMPOSANO</a></h1>
+        </div>
+
+        <!-- Hamburger Button (Animates to X on mobile) -->
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Navigation Links (Desktop inline / Mobile LEFT sidebar) -->
+        <div class="nav-drawer" id="navDrawer">
+            <div class="drawer-header">
+                <span class="drawer-title">// NAVIGATION</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#projects">PROJECTS</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Dark / Light Mode Toggle Switch -->
+                <button type="button" class="theme-toggle" id="themeToggleBtn" aria-label="Toggle color theme" title="Switch Theme">
+                    <span class="theme-indicator" id="themeIndicator"></span>
+                    <span class="theme-label" id="themeLabel">DARK</span>
+                </button>
+
+                <a href="sources/files/Mark Steven Camposano-Resume.pdf" class="resume-btn" target="_blank">resume_v1.pdf</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<main>
+    <section id="home">
+        <div class="hero">
+            <h1>
+                WEB<br>
+                DEVELOPER/><span class="cursor-underscore">_</span>
+            </h1>
+
+            <p>Building your goals with passion with every code. Architecting scalable web systems, clean backend APIs, and responsive user interfaces.</p>
+
+            <div class="hero-actions">
+                <a href="#projects" class="projects_btn">VIEW PROJECTS <span>&rarr;</span></a>
+                <a href="#about" class="about_btn">LEARN MORE</a>
+            </div>
+        </div>
+
+        <div class="hero-hud">
+            <div class="hud-corner top-left"></div>
+            <div class="hud-corner top-right"></div>
+            <div class="hud-corner bottom-left"></div>
+            <div class="hud-corner bottom-right"></div>
+
+            <div class="hud-header">
+                <span>SYS.STATUS: NORMAL</span>
+                <span>UPTIME: 99.9%</span>
+            </div>
+
+            <div class="hud-bars">
+                <div class="bar-group">
+                    <div class="bar-label">
+                        <span>BACKEND_DEV</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 85%;"></div>
+                    </div>
+                </div>
+
+                <div class="bar-group">
+                    <div class="bar-label">
+                        <span>NETWORKING</span>
+                        <span>78%</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill" style="width: 78%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hud-footer">
+                <div class="metric-number">04</div>
+                <div class="metric-label">ACTIVE_PROJECTS</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-container">
+            <div class="about-top-header">
+                <h2>01 / ABOUT<span class="cursor-underscore">_</span></h2>
+            </div>
+
+            <div class="about-editorial-grid">
+                
+                <div class="about-left-col">
+                    <span class="mono-label">/ SRC_IDENTITY_PORTRAIT</span>
+
+                    <div class="portrait-frame" id="portraitFrame">
+                        <div class="hud-corner top-left"></div>
+                        <div class="hud-corner top-right"></div>
+                        <div class="hud-corner bottom-left"></div>
+                        <div class="hud-corner bottom-right"></div>
+
+                        <img src="sources/images/4843fb26-85e7-4f37-8a94-6355236723d9.jpg" alt="Mark Steven Camposano Portrait">
+                        <div class="portrait-scanline" aria-hidden="true"></div>
+                    </div>
+
+                    <div class="portrait-meta">
+                        <div class="meta-block">
+                            <span class="meta-title">LOCATION</span>
+                            <span class="meta-value">LEYTE, PH</span>
+                        </div>
+                        <div class="meta-block">
+                            <span class="meta-title">STATUS</span>
+                            <span class="meta-value status-available">AVAILABLE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-right-col">
+                    <h3 class="about-statement">
+                        BRIDGING THE GAP BETWEEN RAW FUNCTIONAL LOGIC AND EDITORIAL AESTHETICS.
+                    </h3>
+
+                    <div class="about-bio">
+                        <p>
+                            I am a passionate web developer with a strong focus on creating efficient and scalable web applications. With experience in backend development, I strive to deliver seamless user experiences and robust functionality. My goal is to contribute to innovative projects that make a positive impact.
+                        </p>
+                        <p>
+                            When I'm not coding, I enjoy exploring new technologies, building new projects, and continuously improving my skills. Let's connect and collaborate on exciting web development ventures!
+                        </p>
+                    </div>
+
+                    <div class="tech-overview">
+                        <div class="tech-overview-header">
+                            <span class="mono-label">/ TECH_STACK_OVERVIEW</span>
+                            <span class="tech-hint" id="techHint">[HOVER OR TAP A MODULE]</span>
+                        </div>
+
+                        <div class="tech-columns">
+                            <div class="tech-col">
+                                <h4>CORE_FRONTEND</h4>
+                                <ul class="tech-list">
+                                    <li data-detail="Semantic structure, accessible layouts & modern CSS Grid/Flexbox">BASIC HTML5 / CSS3</li>
+                                    <li data-detail="Interactive DOM engineering, ES6+ & responsive client logic">BASIC JavaScript (ES6+)</li>
+                                    <li data-detail="Utility-first CSS framework for rapid UI development">TAILWIND CSS</li>
+                                </ul>
+                            </div>
+
+                            <div class="tech-col">
+                                <h4>ENGINEERING</h4>
+                                <ul class="tech-list">
+                                    <li data-detail="RESTful APIs, JWT authentication & clean backend architecture">Python / Django/Django REST Framework</li>
+                                    <li data-detail="Relational schema design, indexing & query optimization">PostgreSQL / MySQL</li>
+                                    <li data-detail="Version control, Linux environments & cloud deployment">Git / Basic Linux / Render</li>
+                                    <li data-detail="Cloud infrastructure">Cloudinary</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="design-philosophy">
+                        <h4>DESIGN_PHILOSOPHY</h4>
+                        <blockquote>
+                            "Function is the highest form of beauty. Complexity is a debt we must constantly pay down through refinement."
+                        </blockquote>
+                    </div>
+
+                    <div class="about-cta">
+                        <a href="sources/files/Mark Steven Camposano-Resume.pdf" class="download-cv-link" target="_blank">
+                            Download_Resume <span class="arrow">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+            <!-- PROJECTS SECTION (Interactive HUD Carousel) -->
+    <section id="projects">
+        <div class="projects-container">
+            <div class="projects-header-row">
+                <div class="projects-header">
+                    <span class="mono-label">/ DEPLOYED_ARCHIVES</span>
+                    <h2>02 / PROJECTS<span class="cursor-underscore">_</span></h2>
+                </div>
+
+                <!-- Carousel Controls -->
+                <div class="carousel-controls">
+                    <span class="carousel-counter" id="carouselCounter">01 / 03</span>
+                    <div class="carousel-buttons">
+                        <button type="button" class="carousel-btn" id="prevProjectBtn" aria-label="Previous project">
+                            &larr; PREV
+                        </button>
+                        <button type="button" class="carousel-btn" id="nextProjectBtn" aria-label="Next project">
+                            NEXT &rarr;
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Track Wrapper -->
+            <div class="projects-carousel-wrapper">
+                <div class="projects-track" id="projectsTrack">
+                    <!-- Project Card 1 -->
+                    <article class="project-card">
+                        <div class="hud-corner top-left"></div>
+                        <div class="hud-corner top-right"></div>
+                        <div class="hud-corner bottom-left"></div>
+                        <div class="hud-corner bottom-right"></div>
+
+                        <div class="project-meta-bar">
+                            <span class="project-id">PRJ_01 // SYSTEM</span>
+                            <span class="project-status">MOCK PROJECT</span>
+                        </div>
+
+                        <div class="project-thumb">
+                            <img src="sources/images/Booking_API.jpg" alt="Booking System Screenshot">
+                            <div class="project-scanline" aria-hidden="true"></div>
+                        </div>
+
+                        <div class="project-info">
+                            <h3>Booking System for Hotel or Resort</h3>
+                            <p>A booking system for managing reservations at hotels or resorts. Includes a REST API for handling room availability, bookings, payments, and user activity tracking.</p>
+
+                            <div class="project-tags">
+                                <span>Python / Django</span>
+                                <span>Django REST</span>
+                                <span>Simple JWT</span>
+                                <span>PostgreSQL / SQLite</span>
+                                <span>Cloudinary</span>
+                                <span>Render</span>
+                            </div>
+
+                            <div class="project-actions">
+                                <a href="https://github.com/Kram-Nevets/booking-system.git" class="project-link" target="_blank">
+                                    View on Github <span class="arrow">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 2 -->
+                    <article class="project-card">
+                        <div class="hud-corner top-left"></div>
+                        <div class="hud-corner top-right"></div>
+                        <div class="hud-corner bottom-left"></div>
+                        <div class="hud-corner bottom-right"></div>
+
+                        <div class="project-meta-bar">
+                            <span class="project-id">PRJ_02 // WEBPAGE</span>
+                            <span class="project-status">DEPLOYED</span>
+                        </div>
+
+                        <div class="project-thumb">
+                            <img src="sources/images/Screenshot 2026-11-27 124641.png" alt="Tunga Guide Screenshot">
+                            <div class="project-scanline" aria-hidden="true"></div>
+                        </div>
+
+                        <div class="project-info">
+                            <h3>Tunga Guide</h3>
+                            <p>An interactive cultural and tourism portal dedicated to showcasing the history, leadership, and local tourist attractions of Tunga, Leyte.</p>
+
+                            <div class="project-tags">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>JavaScript</span>
+                                <span>Render</span>
+                                <span>Git / GitHub</span>
+                            </div>
+
+                            <div class="project-actions">
+                                <a href="https://tunga-guide-webiste.onrender.com/" class="project-link" target="_blank">
+                                    View Project <span class="arrow">&rarr;</span>
+                                </a>
+                                <a href="https://github.com/TRESTEVOYCE/Tunga-Guide-Webiste.git" class="project-link" target="_blank">
+                                    View on Github <span class="arrow">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 3 -->
+                    <article class="project-card">
+                        <div class="hud-corner top-left"></div>
+                        <div class="hud-corner top-right"></div>
+                        <div class="hud-corner bottom-left"></div>
+                        <div class="hud-corner bottom-right"></div>
+
+                        <div class="project-meta-bar">
+                            <span class="project-id">PRJ_03 // WEBAPP</span>
+                            <span class="project-status">DEPLOYED</span>
+                        </div>
+
+                        <div class="project-thumb">
+                            <img src="sources/images/Screenshot 2026-11-27 130107.png" alt="Albumize Screenshot">
+                            <div class="project-scanline" aria-hidden="true"></div>
+                        </div>
+
+                        <div class="project-info">
+                            <h3>Albumize</h3>
+                            <p>A Django-based Photo Album Web Application allowing authenticated users to upload photos, organize albums, and manage gallery collections in a structured interface.</p>
+
+                            <div class="project-tags">
+                                <span>Python / Django</span>
+                                <span>Tailwind CSS</span>
+                                <span>JavaScript</span>
+                                <span>PostgreSQL</span>
+                                <span>Cloudinary</span>
+                                <span>Render</span>
+                            </div>
+
+                            <div class="project-actions">
+                                <a href="https://albumize.onrender.com/" class="project-link" target="_blank">
+                                    View Project <span class="arrow">&rarr;</span>
+                                </a>
+                                <a href="https://github.com/TRESTEVOYCE/Albumize.git" class="project-link" target="_blank">
+                                    View on Github <span class="arrow">&rarr;</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Pagination Dots -->
+            <div class="carousel-dots" id="carouselDots" aria-label="Project slides">
+                <button type="button" class="dot active" data-index="0" aria-label="Slide 1"></button>
+                <button type="button" class="dot" data-index="1" aria-label="Slide 2"></button>
+                <button type="button" class="dot" data-index="2" aria-label="Slide 3"></button>
+            </div>
+        </div>
+    </section>
+
+
+</main>
+
+    <footer>
+    <section id="contact">
+        <div class="footer-container">
+            <div class="footer-header">
+                <span class="section-tag">03 // ESTABLISH_CONNECTION</span>
+                <h2>CONTACT_ME<span class="cursor-underscore">_</span></h2>
+            </div>
+
+            <div class="footer-grid">
+                <!-- Left Column: Direct Contact Info -->
+                <div class="footer-info">
+                    <p class="footer-desc">
+                        Have a project in mind or looking for a web developer? Send a transmission through the terminal or reach out directly.
+                    </p>
+
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="contact-label">EMAIL:</span>
+                            <a href="mailto:markstevencamposano@gmail.com">markstevencamposano@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">PHONE:</span>
+                            <a href="tel:+639668334358">09668334358</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-label">STATUS:</span>
+                            <span class="status-online">ONLINE // READY_TO_COLLABORATE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: HUD Contact Form -->
+                <div class="contact-form-card">
+                    <div class="hud-corner top-left"></div>
+                    <div class="hud-corner top-right"></div>
+                    <div class="hud-corner bottom-left"></div>
+                    <div class="hud-corner bottom-right"></div>
+
+                    <form id="contactForm" class="hud-form">
+                        <div class="form-group">
+                            <label for="senderName">01 // NAME</label>
+                            <input type="text" id="senderName" name="name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="senderEmail">02 // EMAIL</label>
+                            <input type="email" id="senderEmail" name="email" placeholder="Enter your email address" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="senderMessage">03 // MESSAGE</label>
+                            <textarea id="senderMessage" name="message" rows="4" placeholder="Write your message here..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">SEND MESSAGE <span>&rarr;</span></button>
+
+                        <!-- Success Alert Box (Hidden until submit) -->
+                        <div id="formSuccessAlert" class="form-alert" role="alert" aria-live="polite">
+                            <span class="alert-dot"></span>
+                            <span id="alertText">TRANSMISSION_SENT // Thank you! Your message has been received.</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+:root {
+    --bg-primary: #080908;
+    --bg-card: rgba(14, 16, 13, 0.75);
+    --border-subtle: #1F241D;
+    --text-primary: #F4F5F4;
+    --text-muted: #7C827A;
+    --neon-accent: #D4F637;
+    --neon-glow: rgba(212, 246, 55, 0.16);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Keep site sections layered above the background beams */
+header, main, footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* Dynamic Neon Light Beams Container */
+.bg-beams {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.shooting-beam {
+    position: absolute;
+    height: 1.5px;
+    transform-origin: left center;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(212, 246, 55, 0.15) 35%,
+        rgba(212, 246, 55, 0.85) 85%,
+        #FFFFFF 100%
+    );
+    box-shadow: 0 0 18px 2px rgba(212, 246, 55, 0.25);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: shootBeam var(--duration, 4s) cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes shootBeam {
+    0% {
+        opacity: 0;
+        transform: rotate(var(--angle)) translateX(-30vw) scaleX(0.6);
+    }
+    15% {
+        opacity: var(--max-opacity, 0.7);
+    }
+    85% {
+        opacity: var(--max-opacity, 0.7);
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(var(--angle)) translateX(130vw) scaleX(1.1);
+    }
+}
+/* Default Dark Theme */
+:root {
+    --bg-primary: #080908;
+    --bg-card: rgba(14, 16, 13, 0.78);
+    --bg-header: rgba(8, 9, 8, 0.85);
+    --border-subtle: #1F241D;
+    --text-primary: #F4F5F4;
+    --text-muted: #7C827A;
+    --neon-accent: #D4F637;
+    --neon-glow: rgba(212, 246, 55, 0.16);
+}
+
+/* Crisp Editorial Light Mode */
+[data-theme="light"] {
+    --bg-primary: #F5F6F4;
+    --bg-card: rgba(255, 255, 255, 0.88);
+    --bg-header: rgba(245, 246, 244, 0.88);
+    --border-subtle: #D5D9D2;
+    --text-primary: #111311;
+    --text-muted: #585E56;
+    --neon-accent: #4D7C0F; /* Deep electric olive-lime for strong contrast on light backgrounds */
+    --neon-glow: rgba(77, 124, 15, 0.15);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
